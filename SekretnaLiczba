@@ -1,0 +1,61 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Wybierz poziom trudności: łatwy, średni, trudny");
+        string poziomTrudnosci = Console.ReadLine().ToLower();
+
+        int iloscProb;
+        int zakresMin, zakresMax;
+
+        switch (poziomTrudnosci)
+        {
+            case "łatwy":
+                iloscProb = 2;
+                zakresMin = 1;
+                zakresMax = 9;
+                break;
+
+            case "średni":
+                iloscProb = 5;
+                zakresMin = 10;
+                zakresMax = 99;
+                break;
+
+            case "trudny":
+                iloscProb = 8;
+                zakresMin = 100;
+                zakresMax = 999;
+                break;
+
+            default:
+                Console.WriteLine("Nieprawidłowy poziom trudności. Gra zakończona.");
+                return;
+        }
+
+        Random random = new Random();
+        int liczbaDoOdgadniecia = random.Next(zakresMin, zakresMax + 1);
+
+        Console.WriteLine($"Odgadnij liczbę z zakresu {zakresMin}-{zakresMax}.");
+
+        for (int i = 0; i < iloscProb; i++)
+        {
+            Console.Write($"Próba {i + 1}: ");
+            int propozycja = Convert.ToInt32(Console.ReadLine());
+
+            if (propozycja == liczbaDoOdgadniecia)
+            {
+                Console.WriteLine("Gratulacje! Zgadłeś liczbę!");
+                return;
+            }
+            else
+            {
+                Console.WriteLine("Nieprawidłowa liczba. Spróbuj ponownie.");
+            }
+        }
+
+        Console.WriteLine($"Przykro mi, nie udało się odgadnąć liczby. Prawidłowa liczba to {liczbaDoOdgadniecia}.");
+    }
+}
